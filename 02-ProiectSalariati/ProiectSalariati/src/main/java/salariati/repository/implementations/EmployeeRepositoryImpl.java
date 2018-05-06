@@ -14,9 +14,15 @@ import salariati.validator.EmployeeValidator;
 
 public class EmployeeRepositoryImpl implements IEmployeeRepository {
 
-    private final String employeeFileName = "employees.txt";
+    private String employeeFileName = "employees.txt";
     private EmployeeValidator employeeValidator = new EmployeeValidator();
 
+
+    public EmployeeRepositoryImpl(){
+    }
+    public EmployeeRepositoryImpl(String file){
+        this.employeeFileName = file;
+    }
     @Override
     public boolean addEmployee(Employee employee) {
         if (employeeValidator.isValid(employee)) {

@@ -19,12 +19,12 @@ public class EmployeeRepositoryMock implements IEmployeeRepository {
         employeeValidator = new EmployeeValidator();
         employeeList = new ArrayList<Employee>();
 
-        Employee Ionel = new Employee("FirstName", "Pacuraru", "45", "1234567890876", DidacticFunction.ASISTENT, "2500");
-        Employee Mihai = new Employee("FirstName", "Dumitrescu", "45", "1234567890876", DidacticFunction.LECTURER, "2500");
-        Employee Ionela = new Employee("FirstName", "Ionescu", "45", "1234567890876", DidacticFunction.LECTURER, "2500");
-        Employee Mihaela = new Employee("FirstName", "Pacuraru", "45", "1234567890876", DidacticFunction.ASISTENT, "2500");
+        Employee Ionel = new Employee("FirstName", "Pacuraru", "45", "1234567890876", DidacticFunction.ASISTENT, "700");
+        Employee Mihai = new Employee("FirstName", "Dumitrescu", "45", "1234567890876", DidacticFunction.LECTURER, "7500");
+        Employee Ionela = new Employee("FirstName", "Ionescu", "45", "1234567890876", DidacticFunction.LECTURER, "3500");
+        Employee Mihaela = new Employee("FirstName", "Pacuraru", "45", "1234567890876", DidacticFunction.ASISTENT, "4500");
         Employee Vasile = new Employee("FirstName", "Georgescu", "45", "1234567890876", DidacticFunction.TEACHER, "2500");
-        Employee Marin = new Employee("FirstName", "Puscas", "45", "1234567890876", DidacticFunction.TEACHER, "2500");
+        Employee Marin = new Employee("FirstName", "Puscas", "25", "1234567890876", DidacticFunction.TEACHER, "3500");
 
         employeeList.add(Ionel);
         employeeList.add(Mihai);
@@ -50,6 +50,12 @@ public class EmployeeRepositoryMock implements IEmployeeRepository {
 
     @Override
     public boolean modifyEmployee(String cnp, DidacticFunction function) {
+        for (Employee emp : this.employeeList) {
+            if (emp.getCnp().equals(cnp)) {
+                emp.setFunction(function);
+                return true;
+            }
+        }
         return false;
     }
 
