@@ -36,12 +36,19 @@ public class ModifyEmployeeTest {
     }
     @Test
     public void testModify2() {
-        String cnp = "1234567891234";
-        employeeRepository = new EmployeeRepositoryImpl("c.txt");
+        employeeRepository = new EmployeeRepositoryMock();
         controller = new EmployeeController(employeeRepository);
-        controller.modifyEmployee(cnp, DidacticFunction.TEACHER);
+        Employee newEmployee = new Employee("Andrei", "Pop", "22", "3333444441234", DidacticFunction.TEACHER, "9999");
+        controller.addEmployee(newEmployee);
+        assertEquals(7, controller.getEmployeesList().size());
+        assertTrue(newEmployee.equals(controller.getEmployeesList().get(controller.getEmployeesList().size() - 1)));
+
+        assertTrue(controller.getEmployeesSortedList().get(0).getLastName().equals("Pop"));
+
+        controller.modifyEmployee("3333444441234", DidacticFunction.LECTURER);
         Employee e = controller.getEmployeesList().get(0);
-        assertTrue(DidacticFunction.TEACHER.equals(e.getFunction()));
+        assertEquals("Pop", e.getLastName());
+        assertEquals(DidacticFunction.LECTURER, e.getFunction());
     }
     @Test
     public void testModify3() {
@@ -77,12 +84,13 @@ public class ModifyEmployeeTest {
 
     @Test
     public void testModify6() {
-        String cnp = "1234567115555";
-        employeeRepository = new EmployeeRepositoryImpl("d.txt");
+
+        employeeRepository = new EmployeeRepositoryMock();
         controller = new EmployeeController(employeeRepository);
-        controller.modifyEmployee(cnp, DidacticFunction.ASISTENT);
-        Employee e = controller.getEmployeesList().get(3);
-        assertTrue(DidacticFunction.LECTURER.equals(e.getFunction()));
+
+        controller.modifyEmployee("3333444441234", DidacticFunction.LECTURER);
+        Employee e = controller.getEmployeesList().get(0);
+        assertTrue(DidacticFunction.ASISTENT.equals(e.getFunction()));
     }
 
 
